@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SpawnPointEditorVeiw : MonoBehaviour
+public class SpawnPointActivatorEditorVeiw : MonoBehaviour
 {
     [SerializeField] private SpawnPointActivator _spawnPointActivator;
 

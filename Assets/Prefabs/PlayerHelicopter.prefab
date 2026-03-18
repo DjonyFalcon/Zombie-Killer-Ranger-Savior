@@ -162,7 +162,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9505d7cdb94936f4f8276c193808a0c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _surviorTransform: {fileID: 0}
 --- !u!1 &6618630227468656886
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,8 +327,8 @@ MonoBehaviour:
     m_Bits: 8
   _maxAmmo: 15
   _damage: 45
-  _reloadTime: 3
-  _timeBetweenShots: 0.6
+  _reloadTime: 2.5
+  _timeBetweenShots: 0.4
   _weaponTransform: {fileID: 2697406859733871561}
 --- !u!1001 &2118226530883333070
 PrefabInstance:

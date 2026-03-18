@@ -3,6 +3,7 @@ using UnityEngine;
 public class SurviorAnimationHandler : MonoBehaviour
 {
     private const string Die = nameof(Die);
+    private const string Move = nameof(Move);
 
     [SerializeField] private Animator _animator;
 
@@ -11,5 +12,10 @@ public class SurviorAnimationHandler : MonoBehaviour
     public void PlayeDeathAnimation() 
     {
         _animator.SetTrigger(_dieTrigger);
+    }
+
+    public void PlayMoveAnimation() 
+    {
+        
     }
 }

@@ -6,46 +6,47 @@ public class Health : MonoBehaviour
     [SerializeField] private float _maxValue = 100;
 
     private float _currentValue;
-    private bool _isInvulnerable;
 
+    private bool _isAlive = true;
+
+    public event Action OnRised;
     public event Action Died;
     public event Action<float> DamageTaked;
 
-    private void Awake()
+    public bool IsAlive => _isAlive;
+
+    private void Start()
     {
+        Rise();
+    }
+
+    public void Rise()
+    {
+        _isAlive = true;
         _currentValue = _maxValue;
-        DisableInvulnerability();
-    }
-
-    public void EnableInvulnerability() 
-    {
-        _isInvulnerable = true;
-    }
-
-    public void DisableInvulnerability()
-    {
-        _isInvulnerable = false;
+        OnRised?.Invoke();
     }
 
     public void TakeDamage(float damage)
     {
-        if (_isInvulnerable != true)
+        if (_currentValue > 0)
         {
-            if (_currentValue > 0)
+            _currentValue -= damage;
+
+
+            if (_currentValue < 0)
             {
-                _currentValue -= damage;
-
-
-                if (_currentValue < 0)
-                {
-                    _currentValue = 0;
-                    Died?.Invoke();
-                }
-
-                DamageTaked?.Invoke(damage);
-
-                Debug.Log(gameObject.name + " Health : " + _currentValue);
+                Die();
             }
+
+            DamageTaked?.Invoke(damage);
         }
+    }
+
+    private void Die() 
+    {
+        _isAlive = false;
+        Died?.Invoke();
+        _currentValue = 0;
     }
 }

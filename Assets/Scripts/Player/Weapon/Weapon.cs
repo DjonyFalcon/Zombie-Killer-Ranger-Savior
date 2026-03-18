@@ -25,6 +25,7 @@ namespace Player
 
         public event Action<int> AmmoChanged;
         public event Action Shooted;
+        public event Action StartReloading;
 
         private void Awake()
         {
@@ -44,19 +45,21 @@ namespace Player
 
                 if (hitInfo.collider.TryGetComponent<IDamageable>(out IDamageable damageable))
                 {
-                    if (_currentAmmo > 0 && _isAvailiable)
+                    if (damageable.IsAvailibleToDamage) 
                     {
-                        Shooted?.Invoke();
-                        _isAvailiable = false;
-                        _currentAmmo--;
-                        AmmoChanged?.Invoke(_currentAmmo);
-                        damageable.TakeDamage(_damage);
-                        StartCoroutine(DelayBetweenShoots());
-                       
-                    }
-                    else if (_currentAmmo == 0 && _reloadCoroutine == null)
-                    { 
-                        _reloadCoroutine = StartCoroutine(Reload());
+                        if (_currentAmmo > 0 && _isAvailiable)
+                        {
+                            Shooted?.Invoke();
+                            _isAvailiable = false;
+                            _currentAmmo--;
+                            AmmoChanged?.Invoke(_currentAmmo);
+                            damageable.TakeDamage(_damage);
+                            StartCoroutine(DelayBetweenShoots());
+                        }
+                        else if (_currentAmmo == 0 && _reloadCoroutine == null)
+                        {
+                            _reloadCoroutine = StartCoroutine(Reload());
+                        }
                     }
                 }
             }
@@ -71,6 +74,8 @@ namespace Player
 
         private IEnumerator Reload() 
         {
+            StartReloading?.Invoke();
+
             yield return _waitReloadTime;
 
             _currentAmmo = _maxAmmo;

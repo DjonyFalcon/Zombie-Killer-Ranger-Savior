@@ -41,7 +41,6 @@ public class ZombieSpawner : MonoBehaviour
         {
             if (zombieSpawnPoint.IsActive == true && zombieSpawnPoint.IsCanSpawnZombie)
             {
-                Debug.Log("Spawn");
                 _zombiePool.SpawnZombieIn(zombieSpawnPoint.Position);
                 zombieSpawnPoint.IncreseSpawnCounter();
             }

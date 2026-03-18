@@ -18,8 +18,6 @@ public class Zombie : MonoBehaviour
 
     private Transform _tramsform;
 
-    private bool _isALive;
-
     public event Action<Zombie> Died;
 
     private void OnEnable()
@@ -37,27 +35,27 @@ public class Zombie : MonoBehaviour
     private void Awake()
     {
         _tramsform = transform;
-        _isALive = true;
     }
 
     private void FixedUpdate()
     {
-        if (_isALive)
+        if (_health.IsAlive)
         {
             _distanceMeter.Measure();
             _navMeshAgent.SetDestination(_survior.transform.position);
         }
     }
 
-    public void Init(Vector3 position, Survior survior) 
+    public void Init(Vector3 position, Survior survior)
     {
         _tramsform.position = position;
         _survior = survior;
         _distanceMeter.SetTarget(_survior.transform);
-        _isALive = true;
+        _health.Rise();
+        _navMeshAgent.isStopped = false;
     }
 
-    private void Attack() 
+    private void Attack()
     {
         _zombieHand.Attack(_survior);
         _animatorHandler.PlayAttackAnimation();
@@ -65,14 +63,13 @@ public class Zombie : MonoBehaviour
 
     private void Die()
     {
-        _isALive = false;
-        _navMeshAgent.Stop();
+        _navMeshAgent.isStopped = true;
         _rigidbody.velocity = Vector3.zero;
         _animatorHandler.PlayDeathAnimation();
         StartCoroutine(DelayDeath());
     }
 
-    private IEnumerator DelayDeath() 
+    private IEnumerator DelayDeath()
     {
         yield return new WaitForSeconds(DeathTime);
 

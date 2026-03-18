@@ -10,7 +10,6 @@ public class SaveZone : MonoBehaviour
         if (collision != null && collision.collider.TryGetComponent(out Survior survior))
         {
             SurviorArrived?.Invoke();
-            survior.EnableInvulnerability();
         }
     }
 }

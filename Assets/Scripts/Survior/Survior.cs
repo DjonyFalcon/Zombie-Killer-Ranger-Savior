@@ -12,7 +12,7 @@ public class Survior : MonoBehaviour, IDamageable
 
     private Transform _transform;
 
-    private bool _isALive = true;
+    public bool IsAvailibleToDamage => _health.IsAlive;
 
     [Inject]
     private void Construct(Transform destinationPoint) 
@@ -37,13 +37,8 @@ public class Survior : MonoBehaviour, IDamageable
 
     private void FixedUpdate()
     {
-        if (_isALive)
+        if (_health.IsAlive)
             _mover.MoveTo(_destinationPoint, _transform, _rigidbody);
-    }
-
-    public void EnableInvulnerability()
-    {
-        _health.EnableInvulnerability();
     }
 
     public void TakeDamage(float damage)
@@ -51,10 +46,16 @@ public class Survior : MonoBehaviour, IDamageable
         _health.TakeDamage(damage);
     }
 
+    public void Rise() 
+    {
+        _surviorAnimationHandler.PlayMoveAnimation();
+        _rigidbody.isKinematic = false;
+    }
+
     public void Die()
     {
-        _isALive = false;
         _mover.StopMoving(_rigidbody);
         _surviorAnimationHandler.PlayeDeathAnimation();
+        _rigidbody.isKinematic = true;
     }
 }
