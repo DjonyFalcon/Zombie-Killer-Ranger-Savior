@@ -1,47 +1,45 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 
 public class HelicopterPositioner : MonoBehaviour
 {
+    [Header("Base settings")]
     [SerializeField] private float _baseDistance = 15f;
     [SerializeField] private float _baseHeight = 5.3f;
     [SerializeField] private float _rotationDuration = 5f;
     [SerializeField] private float _maxSpeed = 8f;
     [SerializeField] private float _positionSmoothTime = 1f;
+
+    [Header("Ranges")]
     [SerializeField] private float _horizontalRange = 3f;
     [SerializeField] private float _verticalRange = 7f;
     [SerializeField] private float _distanceRange = 2f;
+
+    [Header("Speeds")]
     [SerializeField] private float _horizontalSpeed = 0.5f;
     [SerializeField] private float _verticalSpeed = 0.7f;
     [SerializeField] private float _distanceSpeed = 0.3f;
 
+
     private Transform _surviorTransform;
-    private Transform _transform;
     private Vector3 _currentVelocity;
     private float _time;
-
+  
     [Inject]
     private void Construct(Survior survior)
     {
         _surviorTransform = survior.transform;
     }
 
-    private void Awake()
-    {
-        _transform = transform;
-        Rotate();
-    }
-
-    private void FixedUpdate()
+    public void Move(Transform _playerTransform) 
     {
         _time += Time.fixedDeltaTime;
 
         Vector3 targetPosition = CalculateTargetPosition();
 
-        _transform.position = Vector3.SmoothDamp(_transform.position, targetPosition, ref _currentVelocity, _positionSmoothTime, _maxSpeed);
+        _playerTransform.position = Vector3.SmoothDamp(_playerTransform.position, targetPosition, ref _currentVelocity, _positionSmoothTime, _maxSpeed);
 
-        Rotate();
+        Rotate(_playerTransform);
     }
 
     private Vector3 CalculateTargetPosition()
@@ -59,13 +57,12 @@ public class HelicopterPositioner : MonoBehaviour
 
 
         Vector3 survivorRight = Vector3.Cross(Vector3.up, survivorForward).normalized;
-
         Vector3 targetPosition = _surviorTransform.position + survivorForward * (_baseDistance + distanceOffset) + Vector3.up * (_baseHeight + verticalOffset) + survivorRight * horizontalOffset;
 
         return targetPosition;
     }
 
-    private void Rotate()
+    private void Rotate(Transform _playerTransform)
     {
         Vector3 direction = _surviorTransform.position - transform.position;
 
@@ -74,6 +71,6 @@ public class HelicopterPositioner : MonoBehaviour
 
         Quaternion targetRotation = Quaternion.LookRotation(Vector3.Cross(direction, Vector3.up), Vector3.up);
 
-        _transform.rotation = Quaternion.Slerp(_transform.rotation, targetRotation, Time.fixedDeltaTime * _rotationDuration);
+        _playerTransform.rotation = Quaternion.Slerp(_playerTransform.rotation, targetRotation, Time.fixedDeltaTime * _rotationDuration);
     }
 }

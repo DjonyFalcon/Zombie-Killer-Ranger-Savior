@@ -15,20 +15,13 @@ public class LocationInstaller : MonoInstaller
 
     private void BindSurviorDestinationPoint()
     {
-        Container
-            .Bind<Transform>()
-            .FromInstance(_surviorDestanationPoint)
-            .AsSingle();
+        Container.Bind<Transform>().FromInstance(_surviorDestanationPoint).AsSingle();
     }
 
     private void BindSurvior()
     {
-        Survior survior = Container
-            .InstantiatePrefabForComponent<Survior>(_surviorPrefab, _surviorStartPoint.position, Quaternion.identity, null);
+        Survior survior = Container.InstantiatePrefabForComponent<Survior>(_surviorPrefab, _surviorStartPoint.position, Quaternion.identity, null);
 
-        Container
-            .Bind<Survior>()
-            .FromInstance(survior)
-            .AsSingle();
+        Container.Bind<Survior>().FromInstance(survior).AsSingle();
     }
 }

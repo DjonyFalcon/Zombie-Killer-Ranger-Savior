@@ -53,6 +53,8 @@ MonoBehaviour:
   _aimer: {fileID: 494460627840801868}
   _weapon: {fileID: 6211614706923742160}
   _weaponAnimationHandler: {fileID: 4088632090548390617}
+  _helicopterPositioner: {fileID: 0}
+  _playerTransform: {fileID: 0}
 --- !u!114 &4088632090548390617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,7 +127,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4921917296895065999}
-  - component: {fileID: 7830455639080967312}
   m_Layer: 0
   m_Name: PlayerHelicopter
   m_TagString: Untagged
@@ -150,18 +151,6 @@ Transform:
   - {fileID: 485849513035308346}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!114 &7830455639080967312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3039685759395674008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9505d7cdb94936f4f8276c193808a0c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6618630227468656886
 GameObject:
   m_ObjectHideFlags: 0
