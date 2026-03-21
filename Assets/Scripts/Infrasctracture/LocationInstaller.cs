@@ -3,25 +3,22 @@ using Zenject;
 
 public class LocationInstaller : MonoInstaller
 {
-    [SerializeField] private Transform _surviorStartPoint;
-    [SerializeField] private Transform _surviorDestanationPoint;
-    [SerializeField] private GameObject _surviorPrefab;
+    [SerializeField] private Map _mapPrefab;
+    [SerializeField] private Survior _surviorPrefab;
+    [SerializeField] private Player _playerPrefab;
 
     public override void InstallBindings()
     {
-        BindSurviorDestinationPoint();
-        BindSurvior();
+        BindSurvior(_mapPrefab.SurviorSpawnPoint);
+        Container.InstantiatePrefabForComponent<Map>(_mapPrefab);
+        Container.InstantiatePrefab(_playerPrefab);
     }
 
-    private void BindSurviorDestinationPoint()
+    private void BindSurvior(Vector3 spawnPoint)
     {
-        Container.Bind<Transform>().FromInstance(_surviorDestanationPoint).AsSingle();
-    }
+        Survior survior = Container.InstantiatePrefabForComponent<Survior>(_surviorPrefab, spawnPoint, Quaternion.identity, null);
 
-    private void BindSurvior()
-    {
-        Survior survior = Container.InstantiatePrefabForComponent<Survior>(_surviorPrefab, _surviorStartPoint.position, Quaternion.identity, null);
-
+        survior.Init(_mapPrefab.WayPoints);
         Container.Bind<Survior>().FromInstance(survior).AsSingle();
     }
 }

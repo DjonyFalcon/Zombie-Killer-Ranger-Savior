@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -5,19 +6,19 @@ using Zenject;
 public class Survior : MonoBehaviour, IDamageable
 {
     [SerializeField] private Mover _mover;
-    [SerializeField] private Transform _destinationPoint;
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private Health _health;
     [SerializeField] private SurviorAnimationHandler _surviorAnimationHandler;
+    [SerializeField] private IReadOnlyList<WayPoint> _wayPoints;
+    [SerializeField] private DistanceMeter _distanceMeter;
 
     private Transform _transform;
 
     public bool IsAvailibleToDamage => _health.IsAlive;
-
-    [Inject]
-    private void Construct(Transform destinationPoint) 
+   
+    public void Init(IReadOnlyList<WayPoint> wayPoints) 
     {
-        _destinationPoint = destinationPoint;
+        _wayPoints = wayPoints;
     }
 
     private void OnEnable()
@@ -38,7 +39,7 @@ public class Survior : MonoBehaviour, IDamageable
     private void FixedUpdate()
     {
         if (_health.IsAlive)
-            _mover.MoveTo(_destinationPoint, _transform, _rigidbody);
+            _mover.MoveTo(_wayPoints[2].transform, _transform, _rigidbody);
     }
 
     public void TakeDamage(float damage)
