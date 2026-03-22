@@ -20,7 +20,6 @@ public class HelicopterPositioner : MonoBehaviour
     [SerializeField] private float _verticalSpeed = 0.7f;
     [SerializeField] private float _distanceSpeed = 0.3f;
 
-
     private Transform _surviorTransform;
     private Vector3 _currentVelocity;
     private float _time;
@@ -30,7 +29,7 @@ public class HelicopterPositioner : MonoBehaviour
     {
         _surviorTransform = survior.transform;
     }
-
+ 
     public void Move(Transform _playerTransform) 
     {
         _time += Time.fixedDeltaTime;

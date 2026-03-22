@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Survior : MonoBehaviour, IDamageable
@@ -9,22 +8,22 @@ public class Survior : MonoBehaviour, IDamageable
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private Health _health;
     [SerializeField] private SurviorAnimationHandler _surviorAnimationHandler;
-    [SerializeField] private IReadOnlyList<WayPoint> _wayPoints;
-    [SerializeField] private DistanceMeter _distanceMeter;
+    [SerializeField] private WayPointChanger _wayPointChanger;
 
     private Transform _transform;
 
     public bool IsAvailibleToDamage => _health.IsAlive;
-   
-    public void Init(IReadOnlyList<WayPoint> wayPoints) 
+
+    public void Init(IReadOnlyList<WayPoint> wayPoints)
     {
-        _wayPoints = wayPoints;
+     _wayPointChanger.SetWayPointsList(wayPoints);
     }
 
     private void OnEnable()
     {
         _health.Died += Die;
     }
+
 
     private void OnDisable()
     {
@@ -39,7 +38,11 @@ public class Survior : MonoBehaviour, IDamageable
     private void FixedUpdate()
     {
         if (_health.IsAlive)
-            _mover.MoveTo(_wayPoints[2].transform, _transform, _rigidbody);
+        {
+             _mover.MoveTo(_wayPointChanger.CurrentWayPointPosition, _transform, _rigidbody);
+        }
+
+        _wayPointChanger.Measure();
     }
 
     public void TakeDamage(float damage)
@@ -47,7 +50,7 @@ public class Survior : MonoBehaviour, IDamageable
         _health.TakeDamage(damage);
     }
 
-    public void Rise() 
+    public void Rise()
     {
         _surviorAnimationHandler.PlayMoveAnimation();
         _rigidbody.isKinematic = false;

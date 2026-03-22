@@ -3,14 +3,13 @@ using Zenject;
 
 public class Player : MonoBehaviour
 {
+    [Inject] private InputReader _inputReader;
+
     [SerializeField] private Aimer _aimer;
     [SerializeField] private Weapon _weapon;
     [SerializeField] private WeaponAnimationHandler _weaponAnimationHandler;
     [SerializeField] private HelicopterPositioner _helicopterPositioner;
     [SerializeField] private Transform _playerTransform;
-
-
-    [SerializeField]private InputReader _inputReader;
 
     private void OnEnable()
     {
@@ -31,11 +30,5 @@ public class Player : MonoBehaviour
     {
         _aimer.Aim(_inputReader.ScreenPointPosition);
         _weapon.Shooting();
-    }
-
-    [Inject]
-    private void Construct(InputReader inputReader)
-    {
-        _inputReader = inputReader;
     }
 }

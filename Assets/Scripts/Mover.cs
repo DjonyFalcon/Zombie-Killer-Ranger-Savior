@@ -8,15 +8,15 @@ public class Mover : MonoBehaviour
 
     public event Action EnoughClosed;
 
-    public void MoveTo(Transform target, Transform transform, Rigidbody rigidbody)
+    public void MoveTo(Vector3 targetPosition, Transform transform, Rigidbody rigidbody)
     {
-        if (transform.position.IsEnoughClose(target.position, _minDistanceToTarget) == false)
+        if (transform.position.IsEnoughClose(targetPosition, _minDistanceToTarget) == false)
         {
-            Vector3 direction = target.position - transform.position;
+            Vector3 direction = targetPosition - transform.position;
 
             direction = direction.normalized;
             rigidbody.velocity = direction * _speed * Time.deltaTime;
-            transform.LookAt(target.position);
+            transform.LookAt(targetPosition);
         }
         else 
         {
