@@ -1,4 +1,3 @@
-
 using UnityEngine;
 using UnityEngine.Pool;
 using Zenject;
@@ -6,7 +5,8 @@ using Zenject;
 public class ZombiePool : MonoBehaviour
 {
     [SerializeField] private Zombie _zombiePrefab;
-    
+    [SerializeField] private Transform _zombieContainer;
+
     private Survior _survior;
     private ObjectPool<Zombie> _pool;
 
@@ -24,11 +24,11 @@ public class ZombiePool : MonoBehaviour
         _pool = CreatePool();
     }
 
-    public void SpawnZombieIn(Vector3 point) 
+    public void SpawnZombieIn(Vector3 point,ZombieType zombieType)
     {
         Zombie zombie = _pool.Get();
 
-        zombie.Init(point,_survior);
+        zombie.Init(point, _survior);
         zombie.Died += ReleaseZombie;
     }
 
@@ -36,19 +36,33 @@ public class ZombiePool : MonoBehaviour
     {
         return new ObjectPool<Zombie>
             (
-                createFunc: () => Instantiate(_zombiePrefab),
+                createFunc: () => InstantiateZombie(),
                 actionOnRelease: (zombie) => zombie.gameObject.SetActive(false),
-                actionOnGet: (zombie) => zombie.gameObject.SetActive(true),
+                actionOnGet: (zombie) => GetZombie(zombie),
                 actionOnDestroy: (zombie) => Destroy(zombie.gameObject),
                 collectionCheck: true,
                 defaultCapacity: _poolCapacity,
                 maxSize: _poolMaxSize
-            ) ;
+            );
     }
 
-    private void ReleaseZombie(Zombie zombie) 
+    private void GetZombie(Zombie zombie) 
+    {
+        zombie.gameObject.SetActive(true);
+    }
+
+    private Zombie InstantiateZombie()
+    {
+        Zombie zombie = Instantiate(_zombiePrefab);
+
+        zombie.transform.SetParent(_zombieContainer);
+
+        return zombie;
+    }
+
+    private void ReleaseZombie(Zombie zombie)
     {
         zombie.Died -= ReleaseZombie;
         _pool.Release(zombie);
     }
-}   
+}

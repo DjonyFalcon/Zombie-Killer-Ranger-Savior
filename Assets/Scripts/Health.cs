@@ -12,10 +12,13 @@ public class Health : MonoBehaviour
     public event Action OnRised;
     public event Action Died;
     public event Action<float> DamageTaked;
+    public event Action<float> ValueChanged;
 
     public bool IsAlive => _isAlive;
+    public float MaxValue => _maxValue;
+    public float CurrentValue => _currentValue;
 
-    private void Start()
+    private void Awake()
     {
         Rise();
     }
@@ -24,6 +27,7 @@ public class Health : MonoBehaviour
     {
         _isAlive = true;
         _currentValue = _maxValue;
+        ValueChanged?.Invoke(_currentValue);
         OnRised?.Invoke();
     }
 
@@ -40,6 +44,7 @@ public class Health : MonoBehaviour
             }
 
             DamageTaked?.Invoke(damage);
+            ValueChanged?.Invoke(_currentValue);
         }
     }
 
@@ -47,6 +52,7 @@ public class Health : MonoBehaviour
     {
         _isAlive = false;
         Died?.Invoke();
+        ValueChanged?.Invoke(_currentValue);
         _currentValue = 0;
     }
 }

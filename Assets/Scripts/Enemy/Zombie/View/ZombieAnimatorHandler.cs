@@ -15,6 +15,12 @@ public class ZombieAnimatorHandler : MonoBehaviour
         _animator.SetTrigger(_dieTrigger);
     }
 
+    public void ResetAllTrigers() 
+    {
+        _animator.ResetTrigger(_attackTrigger);
+        _animator.ResetTrigger(_dieTrigger);
+    }
+
     public void PlayAttackAnimation() 
     {
         _animator.SetTrigger(_attackTrigger);   

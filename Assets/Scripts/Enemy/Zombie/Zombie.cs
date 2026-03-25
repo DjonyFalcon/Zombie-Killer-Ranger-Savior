@@ -53,6 +53,7 @@ public class Zombie : MonoBehaviour
         _distanceMeter.SetTarget(_survior.transform);
         _health.Rise();
         _navMeshAgent.isStopped = false;
+        _animatorHandler.ResetAllTrigers();
     }
 
     private void Attack()
