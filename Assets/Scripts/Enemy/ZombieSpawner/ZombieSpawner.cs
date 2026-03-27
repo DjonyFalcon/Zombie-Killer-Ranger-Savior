@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ZombieSpawner : MonoBehaviour
 {
-    [SerializeField] private ZombiePool _zombiePool;
+    [SerializeField] private List<ZombiePool> _zombiePools;
     [SerializeField] private List<ZombieSpawnPoint> _zombieSpawnPoints;
     [SerializeField] private float DelayBeetweenSpawn = 5f;
 
@@ -41,8 +41,14 @@ public class ZombieSpawner : MonoBehaviour
         {
             if (zombieSpawnPoint.IsActive == true && zombieSpawnPoint.IsCanSpawnZombie)
             {
-                _zombiePool.SpawnZombieIn(zombieSpawnPoint.Position, zombieSpawnPoint.ZombieType);
-                zombieSpawnPoint.IncreseSpawnCounter();
+                for (int i = 0; i < _zombiePools.Count; i++)
+                {
+                    if (_zombiePools[i].ZombieType == zombieSpawnPoint.ZombieType)
+                    {
+                        _zombiePools[i].SpawnZombieIn(zombieSpawnPoint.Position);
+                        zombieSpawnPoint.IncreseSpawnCounter();
+                    }
+                }
             }
         }
     }

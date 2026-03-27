@@ -16,7 +16,7 @@ public class Zombie : MonoBehaviour
     [SerializeField] private ZombieAnimatorHandler _animatorHandler;
     [SerializeField] private NavMeshAgent _navMeshAgent;
 
-    private Transform _tramsform;
+    private Transform _transform;
 
     public event Action<Zombie> Died;
 
@@ -34,7 +34,7 @@ public class Zombie : MonoBehaviour
 
     private void Awake()
     {
-        _tramsform = transform;
+        _transform = transform;
     }
 
     private void FixedUpdate()
@@ -48,7 +48,7 @@ public class Zombie : MonoBehaviour
 
     public void Init(Vector3 position, Survior survior)
     {
-        _tramsform.position = position;
+        _transform.position = position;
         _survior = survior;
         _distanceMeter.SetTarget(_survior.transform);
         _health.Rise();
