@@ -10,7 +10,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float _damage = 10;
     [SerializeField] private float _reloadTime = 3f;
     [SerializeField] private float _timeBetweenShots = 1f;
-    [SerializeField] private PlayerAnimationHandler _playerAnimationHandler;
+    [SerializeField] private BodyRoator _playerAnimationHandler;
 
     private WaitForSeconds _waitReloadTime;
     private WaitForSeconds _waitBetweenShots;

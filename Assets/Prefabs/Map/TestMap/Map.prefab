@@ -775,17 +775,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4886559336033815426, guid: bb3cf5afc379a1448bbf7e95eaf930c8, type: 3}
-      propertyPath: _zombieSpawnPoints.Array.size
-      value: 4
+      propertyPath: _zombiePools.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4886559336033815426, guid: bb3cf5afc379a1448bbf7e95eaf930c8, type: 3}
-      propertyPath: _zombieSpawnPoints.Array.data[1]
+      propertyPath: _zombieSpawnPoints.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4886559336033815426, guid: bb3cf5afc379a1448bbf7e95eaf930c8, type: 3}
+      propertyPath: _zombieSpawnPoints.Array.data[0]
       value: 
       objectReference: {fileID: 2496120753683996613}
     - target: {fileID: 4886559336033815426, guid: bb3cf5afc379a1448bbf7e95eaf930c8, type: 3}
-      propertyPath: _zombieSpawnPoints.Array.data[2]
+      propertyPath: _zombieSpawnPoints.Array.data[1]
       value: 
       objectReference: {fileID: 3827954060441861639}
+    - target: {fileID: 4886559336033815426, guid: bb3cf5afc379a1448bbf7e95eaf930c8, type: 3}
+      propertyPath: _zombieSpawnPoints.Array.data[2]
+      value: 
+      objectReference: {fileID: 1692396019887843342}
     - target: {fileID: 4886559336033815426, guid: bb3cf5afc379a1448bbf7e95eaf930c8, type: 3}
       propertyPath: _zombieSpawnPoints.Array.data[3]
       value: 
@@ -802,12 +810,23 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 3.41
       objectReference: {fileID: 0}
+    - target: {fileID: 6993185664223026638, guid: bb3cf5afc379a1448bbf7e95eaf930c8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8746560666619440931, guid: bb3cf5afc379a1448bbf7e95eaf930c8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9006607950301640700, guid: bb3cf5afc379a1448bbf7e95eaf930c8, type: 3}
       propertyPath: m_Name
       value: ZombieSpawner
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 927210808931580890, guid: bb3cf5afc379a1448bbf7e95eaf930c8, type: 3}
+    - {fileID: 6563048885846189461, guid: bb3cf5afc379a1448bbf7e95eaf930c8, type: 3}
+    - {fileID: 5660026173912987618, guid: bb3cf5afc379a1448bbf7e95eaf930c8, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2745043720945029343, guid: bb3cf5afc379a1448bbf7e95eaf930c8, type: 3}
       insertIndex: -1

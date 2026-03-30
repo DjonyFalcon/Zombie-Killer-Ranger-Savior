@@ -57,7 +57,7 @@ public class ZombiePool : MonoBehaviour
 
     private Zombie InstantiateZombie()
     {
-        Zombie zombie = Instantiate(GetZombiePrefabFromList());
+        Zombie zombie = Instantiate(_zombiePrefabs[Random.Range(0,_zombiePrefabs.Count)]);
 
         zombie.transform.SetParent(_zombieContainer);
 
@@ -68,12 +68,5 @@ public class ZombiePool : MonoBehaviour
     {
         zombie.Died -= ReleaseZombie;
         _pool.Release(zombie);
-    }
-
-    private Zombie GetZombiePrefabFromList()
-    {
-        int randomNumber = Random.Range(0, _zombiePrefabs.Count);
-
-        return _zombiePrefabs[randomNumber];
     }
 }
