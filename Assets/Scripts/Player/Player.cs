@@ -10,14 +10,20 @@ public class Player : MonoBehaviour
     [SerializeField] private WeaponAnimationHandler _weaponAnimationHandler;
     [SerializeField] private HelicopterPositioner _helicopterPositioner;
     [SerializeField] private Transform _playerTransform;
+    [SerializeField] private BodyRoator _bodyRoator;
+    [SerializeField] private WeaponAudioPlayer _weaponAudioPlayer;
 
     private void OnEnable()
     {
+        _weapon.Shooted += _weaponAudioPlayer.PlayShootClip;
+        _weapon.StartReloading += _weaponAudioPlayer.PlayRealoadClip;
         _weapon.Shooted += _weaponAnimationHandler.PlayShootAnimation;
     }
 
     private void OnDisable()
     {
+        _weapon.Shooted -= _weaponAudioPlayer.PlayShootClip;
+        _weapon.StartReloading -= _weaponAudioPlayer.PlayRealoadClip;
         _weapon.Shooted -= _weaponAnimationHandler.PlayShootAnimation;
     }
 
@@ -30,5 +36,6 @@ public class Player : MonoBehaviour
     {
         _aimer.Aim(_inputReader.ScreenPointPosition);
         _weapon.Shooting();
+        _bodyRoator.SetAimPoint(_weapon.AimPoint);
     }
 }

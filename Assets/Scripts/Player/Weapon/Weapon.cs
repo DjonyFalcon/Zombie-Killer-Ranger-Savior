@@ -10,16 +10,19 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float _damage = 10;
     [SerializeField] private float _reloadTime = 3f;
     [SerializeField] private float _timeBetweenShots = 1f;
-    [SerializeField] private BodyRoator _playerAnimationHandler;
 
     private WaitForSeconds _waitReloadTime;
     private WaitForSeconds _waitBetweenShots;
+
+    private Vector3 _aimPoint;
 
     private Coroutine _reloadCoroutine;
 
     private int _currentAmmo;
 
     private bool _isAvailiable;
+
+    public Vector3 AimPoint => _aimPoint;
 
     public event Action<int> AmmoChanged;
     public event Action Shooted;
@@ -39,8 +42,7 @@ public class Weapon : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, _layerMask, QueryTriggerInteraction.Ignore))
         {
-            _playerAnimationHandler.SetTarget(hitInfo.point);
-
+            _aimPoint = hitInfo.point;
 
             if (hitInfo.collider.TryGetComponent<IDamageable>(out IDamageable damageable))
             {

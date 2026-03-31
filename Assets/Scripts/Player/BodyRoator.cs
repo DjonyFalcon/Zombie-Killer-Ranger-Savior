@@ -2,19 +2,10 @@ using UnityEngine;
 
 public class BodyRoator : MonoBehaviour
 {
-    [SerializeField] private Animator _femaleAnimator;
+    [SerializeField] private Transform _aimPoint;
 
-    private Vector3 _target;
-
-    public void SetTarget(Vector3 target)
+    public void SetAimPoint(Vector3 aimPoint)
     {
-        _target = target;
-    }
-
-    private void OnAnimatorIK(int layerIndex)
-    {
-        _femaleAnimator.SetLookAtWeight(1f, 1f, 1f);
-        _femaleAnimator.SetLookAtPosition(_target);
-
+        _aimPoint.position = aimPoint;
     }
 }
