@@ -2233,6 +2233,7 @@ GameObject:
   - component: {fileID: 3353866642756507273}
   - component: {fileID: 4543167120042124851}
   - component: {fileID: 4411469567300814274}
+  - component: {fileID: 5454408247147058376}
   m_Layer: 5
   m_Name: CurrentAmmo
   m_TagString: Untagged
@@ -2358,6 +2359,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5454408247147058376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8596293923514169727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f93a3fed7dc7ec4099ccff623828523, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weapon: {fileID: 6211614706923742160}
+  _ammoText: {fileID: 4411469567300814274}
 --- !u!1 &8605262647740999612
 GameObject:
   m_ObjectHideFlags: 0

@@ -22,6 +22,8 @@ public class Weapon : MonoBehaviour
 
     private bool _isAvailiable;
 
+    public int CurrentAmmo => _currentAmmo;
+
     public Vector3 AimPoint => _aimPoint;
 
     public event Action<int> AmmoChanged;
