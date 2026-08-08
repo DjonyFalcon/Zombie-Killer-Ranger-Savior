@@ -938,8 +938,8 @@ MonoBehaviour:
   _sensetivity: 0.05
   _maxRotationX: 60
   _minRotationX: -60
-  _maxRotationY: 45
-  _minRotationY: -60
+  _maxRotationY: 50
+  _minRotationY: -13
 --- !u!1 &2940283227124884358
 GameObject:
   m_ObjectHideFlags: 0
@@ -1588,7 +1588,7 @@ Transform:
   m_GameObject: {fileID: 5884879227678676743}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.7110001, y: 0.4159999, z: -0.6499997}
+  m_LocalPosition: {x: 0.711, y: 0.46600008, z: -0.7279998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1616,7 +1616,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 1493846408661989315}
   m_Lens:
-    FieldOfView: 75
+    FieldOfView: 58
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -1734,7 +1734,7 @@ Transform:
   m_GameObject: {fileID: 6618630227468656886}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.711, y: 0.416, z: -0.65}
+  m_LocalPosition: {x: 0.711, y: 0.466, z: -0.728}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2046,13 +2046,13 @@ MonoBehaviour:
   _baseHeight: 8
   _rotationDuration: 8
   _maxSpeed: 15
-  _positionSmoothTime: 1.5
+  _positionSmoothTime: 1.66
   _horizontalRange: 15
   _verticalRange: 1.4
-  _distanceRange: 1.6
+  _distanceRange: 1.88
   _horizontalSpeed: 0.1
-  _verticalSpeed: 0.07
-  _distanceSpeed: 0.04
+  _verticalSpeed: 0.1
+  _distanceSpeed: 0.3
 --- !u!1 &7542041434073150506
 GameObject:
   m_ObjectHideFlags: 0

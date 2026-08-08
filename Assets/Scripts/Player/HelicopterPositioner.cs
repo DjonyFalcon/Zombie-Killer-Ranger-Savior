@@ -43,8 +43,6 @@ public class HelicopterPositioner : MonoBehaviour
 
     private Vector3 CalculateTargetPosition()
     {
-        _time += Time.fixedDeltaTime;
-
         float horizontalOffset = Mathf.Sin(_time * _horizontalSpeed) * _horizontalRange;
         float verticalOffset = Mathf.Sin(_time * _verticalSpeed) * _verticalRange;
         float distanceOffset = Mathf.Sin(_time * _distanceSpeed) * _distanceRange;
